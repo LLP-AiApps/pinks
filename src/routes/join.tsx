@@ -80,16 +80,15 @@ function JoinPage() {
           {record.channel}.
         </p>
         <p className="text-sm text-muted">
-          That is a name on this phone. Not a blast. Not a charge. Learn is already open to
-          everyone. Tuition is $0.
+          Next: set a password on Sign in so tickets save to the desk, not just this phone.
         </p>
         {deskNote ? <p className="text-sm text-muted">{deskNote}</p> : null}
         <div className="flex flex-wrap gap-2">
           <Button asChild>
-            <Link to="/learn">Open Learn</Link>
+            <Link to="/login">Sign in / set password</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/letter">Read the letter</Link>
+            <Link to="/history">History</Link>
           </Button>
           <Button variant="outline" onClick={leave}>
             Leave the list
@@ -109,12 +108,15 @@ function JoinPage() {
           <h1 className="font-display text-3xl tracking-tight">Join</h1>
         </HelpRow>
         <p className="text-sm leading-relaxed text-muted">
-          Puts your name on the desk list on this phone. Does not send mail. Does not charge you.
-          Read{" "}
+          Puts your name on the desk list. Then{" "}
+          <Link to="/login" className="text-accent">
+            Sign in
+          </Link>{" "}
+          to set a password and keep weekly tickets. Read{" "}
           <Link to="/legal" className="text-accent">
             Legal
           </Link>{" "}
-          first, then every box.
+          first. Mailer stays dark.
         </p>
       </header>
 

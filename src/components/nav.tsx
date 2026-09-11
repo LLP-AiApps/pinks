@@ -28,6 +28,8 @@ const LETTER = [
 
 const JOIN = [
   { to: "/join", label: "Join" },
+  { to: "/login", label: "Sign in" },
+  { to: "/history", label: "History" },
   { to: "/roster", label: "Roster" },
   { to: "/legal", label: "Legal" },
 ] as const;

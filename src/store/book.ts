@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { BookId } from "@/data/slate";
+import { saveDeskTicket } from "@/lib/desk-auth";
 
 export type SlipLeg = {
   gameId: string;
@@ -67,6 +68,14 @@ export const useBook = create<BookState>()((set, get) => ({
     const slips = [slip, ...get().slips].slice(0, MAX);
     persist(slips);
     set({ slips });
+    void saveDeskTicket({
+      data: {
+        title: `${input.legs.length}-teamer`,
+        book: input.bookName || input.book,
+        stake: input.stake,
+        legs: input.legs.map((l) => ({ pick: l.pick, line: l.line, ml: l.ml })),
+      },
+    }).catch(() => undefined);
     return slip;
   },
   remove: (id) => {
