@@ -14,6 +14,15 @@ export type LogEntry = {
 
 export const CHANGELOG: LogEntry[] = [
   {
+    id: "2026-09-11-domain",
+    at: "2026-09-11T01:26:00-07:00",
+    day: "Fri Sep 11",
+    time: "1:26 AM PT",
+    kind: "ship",
+    title: "Canonical door: pinksdesk.com",
+    body: "The house is Pinks. The address is pinksdesk.com. Netlify stays live until you buy it and point DNS. .vegas is a plate, not the door.",
+  },
+  {
     id: "2026-09-11-roster",
     at: "2026-09-11T01:06:00-07:00",
     day: "Fri Sep 11",

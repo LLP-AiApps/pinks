@@ -7,7 +7,7 @@ export const LEGAL_SECTIONS: { id: string; title: string; body: string }[] = [
   {
     id: "what",
     title: "What Pinks is",
-    body: "Pinks (also “the desk,” “the letter,” Pinkerton) is an educational sports desk. We gather open research — schedules, injuries, history, public splits, posted lines — and we write algorithms to predict outcomes. We compare those guesses to human cappers, to other models, and to Grok on a live wire. The question is whether a colder process can beat emotion. We are not a casino, not a sportsbook, not a messenger, and not a broker. We do not take wagers, hold money, cash tickets, or pay winners.",
+    body: "Pinks (also “the desk,” “the letter,” Pinkerton) is an educational sports desk. The brand is Pinks. The intended public address is pinksdesk.com. We gather open research — schedules, injuries, history, public splits, posted lines — and we write algorithms to predict outcomes. We compare those guesses to human cappers, to other models, and to Grok on a live wire. The question is whether a colder process can beat emotion. We are not a casino, not a sportsbook, not a messenger, and not a broker. We do not take wagers, hold money, cash tickets, or pay winners.",
   },
   {
     id: "not-advice",
