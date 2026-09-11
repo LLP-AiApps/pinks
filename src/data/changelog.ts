@@ -14,6 +14,33 @@ export type LogEntry = {
 
 export const CHANGELOG: LogEntry[] = [
   {
+    id: "2026-09-11-algos",
+    at: "2026-09-11T00:55:00-07:00",
+    day: "Fri Sep 11",
+    time: "12:55 AM PT",
+    kind: "ship",
+    title: "Algorithms, without the cologne",
+    body: "Learn and Engine now name Elo, Massey, Pythagorean, Kelly, CLV — and mark which six weights are actually on the desk. Week 1 is a market prior. Power ratings wait for Sunday.",
+  },
+  {
+    id: "2026-09-11-odds",
+    at: "2026-09-11T00:49:00-07:00",
+    day: "Fri Sep 11",
+    time: "12:49 AM PT",
+    kind: "ship",
+    title: "Pull CBS / Circa — not a ticker",
+    body: "Games has a Pull CBS / Circa button. Grok looks those two up when you tap. Snapshot stays printed. Half-point moves get marked. Cached three minutes so we do not burn the key.",
+  },
+  {
+    id: "2026-09-11-nav",
+    at: "2026-09-11T00:31:00-07:00",
+    day: "Fri Sep 11",
+    time: "12:31 AM PT",
+    kind: "ship",
+    title: "Nav grouped — Board, Letter, Join",
+    body: "Top row is Desk, Yours, Games, Parlays, then three menus. Letter holds the letter, Learn, How to use, What’s new, Sources, Studio. Join holds Join and Legal. Board is analysts, engine, wire, books, pool card. No more sideways hunt on a phone.",
+  },
+  {
     id: "2026-09-11-yours",
     at: "2026-09-11T00:22:00-07:00",
     day: "Fri Sep 11",

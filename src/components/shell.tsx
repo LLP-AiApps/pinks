@@ -1,29 +1,11 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { SNAPSHOT } from "@/data/slate";
 import { HOUSE } from "@/data/house";
 import { Mark } from "@/components/mark";
-import { cn } from "@/lib/utils";
+import { Nav } from "@/components/nav";
 import type { ReactNode } from "react";
 
-const NAV = [
-  { to: "/", label: "Desk" },
-  { to: "/picks", label: "Yours" },
-  { to: "/letter", label: "Letter" },
-  { to: "/learn", label: "Learn" },
-  { to: "/help", label: "How to use" },
-  { to: "/games", label: "Games" },
-  { to: "/parlays", label: "Parlays" },
-  { to: "/analysts", label: "Analysts" },
-  { to: "/engine", label: "Engine" },
-  { to: "/log", label: "What’s new" },
-  { to: "/wire", label: "Wire" },
-  { to: "/books", label: "Books" },
-  { to: "/card", label: "Pool card" },
-  { to: "/studio", label: "Studio" },
-];
-
 export function Shell({ children }: { children: ReactNode }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <div className="min-h-dvh">
       <header className="no-print sticky top-0 z-40 bg-bg/90 backdrop-blur-sm">
@@ -34,25 +16,7 @@ export function Shell({ children }: { children: ReactNode }) {
               {SNAPSHOT.asOf}
             </p>
           </div>
-          <nav className="-mx-4 flex gap-1 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
-            {NAV.map((item) => {
-              const active = pathname === item.to;
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={cn(
-                    "inline-flex h-11 shrink-0 items-center rounded-md px-3 text-sm transition-colors duration-[var(--motion-quick)]",
-                    active
-                      ? "text-accent shadow-[inset_0_-2px_0_0_var(--color-accent)]"
-                      : "text-muted hover:text-fg",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <Nav />
         </div>
         <div className="yard-hash" aria-hidden />
       </header>

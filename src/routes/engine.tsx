@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SOURCES } from "@/data/sources";
+import { ALGORITHMS } from "@/data/algorithms";
 import { allEdges, seasonRecord, WEIGHTS, type GameEdge } from "@/lib/engine";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -65,6 +66,32 @@ function EnginePage() {
             ))}
           </ul>
         </div>
+      </section>
+
+      <section className="flex flex-col gap-3">
+        <div className="flex items-end justify-between gap-3">
+          <h2 className="font-display text-xl">Families</h2>
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/learn/$slug" params={{ slug: "algorithms" }}>
+              Full lesson
+            </Link>
+          </Button>
+        </div>
+        <p className="text-sm text-muted">
+          On the desk vs not yet. Elo and Massey need a season. We will not costume them in Week 1.
+        </p>
+        <ul className="grid gap-2 sm:grid-cols-2">
+          {ALGORITHMS.map((a) => (
+            <li key={a.id} className="rounded-xl bg-surface px-4 py-3 shadow-[var(--shadow-border)]">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="font-medium">{a.name}</span>
+                <Badge tone={a.onDesk ? "win" : "neutral"}>{a.onDesk ? "on desk" : "not yet"}</Badge>
+              </div>
+              <p className="mt-1 text-[0.6875rem] uppercase tracking-wide text-muted">{a.family}</p>
+              <p className="mt-2 text-sm text-muted">{a.pinks}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="flex flex-col gap-3">

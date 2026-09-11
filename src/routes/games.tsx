@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { formatAmerican, formatPct } from "@/lib/odds";
 import { cn } from "@/lib/utils";
 import { HelpRow } from "@/components/help-tip";
+import { OddsBoard } from "@/components/odds-board";
 
 export const Route = createFileRoute("/games")({ component: GamesPage });
 
@@ -18,10 +19,11 @@ function GamesPage() {
           <h1 className="mt-1 font-display text-3xl tracking-tight">Every number, every book</h1>
         </HelpRow>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Consensus from DraftKings, FanDuel, Circa, Westgate, South Point, BetMGM, Pinnacle, Bovada.
-          Click a row for injuries, history, and the hedge.
+          Printed snapshot below. Pull CBS / Circa when you want the live number. We do not scrape
+          twelve books on a timer.
         </p>
       </header>
+      <OddsBoard />
       <ul className="flex flex-col gap-2">
         {GAMES.map((g) => (
           <li key={g.id}>

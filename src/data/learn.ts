@@ -12,6 +12,43 @@ export type Lesson = {
 
 export const LESSONS: Lesson[] = [
   {
+    slug: "algorithms",
+    title: "The algorithms, without the cologne",
+    kicker: "Open",
+    teaser:
+      "Elo, Massey, Pythagorean, Kelly, closing-line value — what they actually are, and which 32% of our blend is just the market.",
+    member: false,
+    body: [
+      "There is no secret NFL formula. There are families. Power ratings (Elo, Glicko, Silver’s ELWAY). Least-squares rankings (Massey in points, Colley in wins). Scoring-profile (Pythagorean, exponent ~2.37). Distributions (Poisson on totals). Price (vig-stripped moneyline). Stake (Kelly). Process (did you beat the close).",
+      "Pinks is not Elo. Week 1 has almost nothing to update. We are a weighted blend of the market (32%), capper consensus (18%), injuries (16%), public fade (12%), spot (12%), and the printed desk (10%). That is a prior plus overlays. The close is the other models, already averaged, with juice on top.",
+      "What we will not do: slap “AI” on a neural net we did not train. Grok is a pull — injuries and CBS/Circa when you tap — not a fifth-down oracle. After Sunday we can start a toy Massey and Pythagorean because then we have points. Until then, claiming a power rating is costume.",
+      "Kelly is stake math, not a pick. If you do not have an edge, Kelly says bet zero. Closing-line value is how you know if you had one. Pull CBS / Circa vs our snapshot is the first half of that. Grading the ticket against the close is the second — after the games, not before.",
+    ],
+    reading: [
+      { title: "Engine (this app)", url: "/engine", why: "The six weights, with bars." },
+      {
+        title: "FiveThirtyEight — NFL Elo",
+        url: "https://fivethirtyeight.com/features/how-our-nfl-predictions-work",
+        why: "The public Elo everyone copies. Home ~48 points. EloDiff / 25 ≈ spread.",
+      },
+      {
+        title: "Nate Silver — ELWAY",
+        url: "https://www.natesilver.net/p/how-our-elway-forecasts-work-methodology",
+        why: "2026. Offense/defense plus QBERT. Not just wins.",
+      },
+      {
+        title: "Pythagorean wins (NFL)",
+        url: "https://nflanalytic.com/explainer-pythagorean-wins.html",
+        why: "PF^2.37. Record lies; differential regresses.",
+      },
+      {
+        title: "Wizard of Odds — Kelly",
+        url: "https://wizardofodds.com/games/blackjack/kelly-criterion/",
+        why: "The stake formula. Same warning: you need an edge first.",
+      },
+    ],
+  },
+  {
     slug: "study",
     title: "What this desk is actually doing",
     kicker: "Open",

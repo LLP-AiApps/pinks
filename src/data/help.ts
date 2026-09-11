@@ -46,10 +46,10 @@ export const HELP = {
   },
   games: {
     title: "Games",
-    body: "Every remaining (and final) matchup. Our pick, the moneyline, the spread, injuries, and why.",
+    body: "Every remaining (and final) matchup. Snapshot first. Pull CBS / Circa when you ask.",
     steps: [
-      "Tap a row to open it.",
-      "Read the injury line before you fade or back a favorite.",
+      "Tap Pull CBS / Circa when you want the live number. Not on load.",
+      "Tap a row to open injuries and the hedge.",
       "If two sides look like a coin, leave them off the parlay.",
     ],
   },
