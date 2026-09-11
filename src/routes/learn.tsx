@@ -29,22 +29,24 @@ function LearnIndex() {
           <h1 className="font-display text-3xl tracking-tight">Learn</h1>
         </HelpRow>
         <p className="max-w-2xl text-sm text-muted">
-          How the ladder works, how to hedge, how we compare Grok to humans. Educational. Not a
-          promise you get paid. Members signed Join.
+          For people who know football and have never stamped a ticket. Start with the board.
+          Then the ladder. Educational. Not a promise you get paid. 21+.
         </p>
         <div className="flex flex-wrap gap-2">
+          <Button asChild>
+            <Link to="/learn/$slug" params={{ slug: "board" }}>
+              Start here
+            </Link>
+          </Button>
           {member ? (
             <Badge tone="win">Member on this phone</Badge>
           ) : (
-            <Button asChild>
+            <Button variant="outline" asChild>
               <Link to="/join">Join</Link>
             </Button>
           )}
           <Button variant="outline" asChild>
             <Link to="/sources">All sources</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link to="/legal">Legal</Link>
           </Button>
         </div>
       </header>
@@ -57,10 +59,7 @@ function LearnIndex() {
               className="flex flex-col gap-2 rounded-xl bg-surface p-5 shadow-[var(--shadow-border)] hover:shadow-[var(--shadow-border-hover)]"
             >
               <div className="flex flex-wrap items-center gap-2">
-                <Badge tone={l.member && !member ? "neutral" : "accent"}>{l.kicker}</Badge>
-                {l.member && !member ? (
-                  <span className="font-mono text-[0.625rem] uppercase text-muted">locked</span>
-                ) : null}
+                <Badge tone="accent">{l.kicker}</Badge>
               </div>
               <h2 className="font-display text-2xl">{l.title}</h2>
               <p className="text-sm text-muted">{l.teaser}</p>
