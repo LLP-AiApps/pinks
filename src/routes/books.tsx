@@ -20,6 +20,43 @@ function BooksPage() {
           not assume it pays like South Point. 21+.
         </p>
       </header>
+      <section className="rounded-xl bg-surface p-5 shadow-[var(--shadow-border)]">
+        <h2 className="font-display text-xl">Free live boards</h2>
+        <p className="mt-1 text-sm text-muted">
+          Casino apps hide the number behind a login. These pages do not. Shop the window after you
+          read the line.
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Button size="sm" asChild>
+            <a href="https://www.cbssports.com/nfl/odds/" target="_blank" rel="noopener noreferrer">
+              CBS odds
+            </a>
+          </Button>
+          <Button size="sm" variant="outline" asChild>
+            <a
+              href="https://www.vegasinsider.com/nfl/odds/las-vegas/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VegasInsider
+            </a>
+          </Button>
+          <Button size="sm" variant="outline" asChild>
+            <a
+              href="https://www.covers.com/sport/football/nfl/odds"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Covers
+            </a>
+          </Button>
+          <Button size="sm" variant="outline" asChild>
+            <a href="https://www.vegasodds.com/" target="_blank" rel="noopener noreferrer">
+              VegasOdds
+            </a>
+          </Button>
+        </div>
+      </section>
       <ul className="grid gap-3 md:grid-cols-2">
         {BOOKS.map((b) => (
           <li key={b.id} className="flex flex-col gap-4 rounded-xl bg-surface p-5 shadow-[var(--shadow-border)]">
