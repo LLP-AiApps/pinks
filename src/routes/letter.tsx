@@ -1,11 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useParams } from "@tanstack/react-router";
 import { POSTS } from "@/data/letter";
 import { MAILER_STATUS } from "@/store/join";
 import { HelpRow } from "@/components/help-tip";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-export const Route = createFileRoute("/letter")({ component: LetterIndex });
+export const Route = createFileRoute("/letter")({ component: LetterLayout });
+
+function LetterLayout() {
+  const { slug } = useParams({ strict: false }) as { slug?: string };
+  if (slug) return <Outlet />;
+  return <LetterIndex />;
+}
 
 function LetterIndex() {
   return (

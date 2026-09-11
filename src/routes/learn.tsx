@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useParams } from "@tanstack/react-router";
 import { LESSONS } from "@/data/learn";
 import { useJoin } from "@/store/join";
 import { HelpRow } from "@/components/help-tip";
@@ -6,7 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
-export const Route = createFileRoute("/learn")({ component: LearnIndex });
+export const Route = createFileRoute("/learn")({ component: LearnLayout });
+
+function LearnLayout() {
+  const { slug } = useParams({ strict: false }) as { slug?: string };
+  if (slug) return <Outlet />;
+  return <LearnIndex />;
+}
 
 function LearnIndex() {
   const { record, hydrate } = useJoin();
