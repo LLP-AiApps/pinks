@@ -153,6 +153,15 @@ export const HELP = {
     body: "Named and linked. If we used it and it is not here, ask.",
     steps: ["Tap the name to open the original.", "X handles are the live pull list."],
   },
+  picks: {
+    title: "Yours",
+    body: "Personalized Pink Ticket. Same engine, your floor. Members. Not a live ticker.",
+    steps: [
+      "Join first.",
+      "Pick Locks / Blend / Flyer and 3–6 legs.",
+      "Save pink ticket prints the worksheet.",
+    ],
+  },
 } as const;
 
 export type HelpId = keyof typeof HELP;
@@ -172,6 +181,7 @@ export const HELP_ORDER: HelpId[] = [
   "legal",
   "learn",
   "sources",
+  "picks",
   "log",
   "studio",
 ];

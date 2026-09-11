@@ -686,7 +686,7 @@ export const CARD_OVERS = {
 };
 
 export const SNAPSHOT = {
-  asOf: "Thu Sep 10, 2026 · 11:08 PM PT",
+  asOf: "Fri Sep 11, 2026 · 12:22 AM PT",
   headline: "49ers 27, Rams 7 in Melbourne. Seahawks 13, Patriots 10. Sunday slate is live.",
   cardBlots: [1, 4, 6, 7, 9, 12, 14, 16, 18, 20, 22, 24, 25, 27, 30, 31],
   mnfTotal: 41,

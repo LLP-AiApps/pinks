@@ -14,6 +14,15 @@ export type LogEntry = {
 
 export const CHANGELOG: LogEntry[] = [
   {
+    id: "2026-09-11-yours",
+    at: "2026-09-11T00:22:00-07:00",
+    day: "Fri Sep 11",
+    time: "12:22 AM PT",
+    kind: "ship",
+    title: "Personalized Pink Ticket + factor bars",
+    body: "Yours rebuilds the ladder from the engine with your style, legs, window, and a public haircut. Engine rows now show bars, not just numbers. Still a typed snapshot — Wire is the live pull. Not a 12-site ticker.",
+  },
+  {
     id: "2026-09-10-learn",
     at: "2026-09-10T23:08:00-07:00",
     day: "Thu Sep 10",

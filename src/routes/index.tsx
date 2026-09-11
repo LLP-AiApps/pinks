@@ -75,6 +75,21 @@ function Home() {
         </p>
       </section>
 
+      <section className="flex flex-col gap-4">
+        <div className="flex items-end justify-between gap-4">
+          <HelpRow id="picks">
+            <h2 className="text-2xl">Yours</h2>
+          </HelpRow>
+          <Button variant="outline" size="sm" asChild>
+            <Link to="/picks">Pink Ticket</Link>
+          </Button>
+        </div>
+        <p className="text-sm text-muted">
+          Personalized ladder from the same blend. Your floor, your window. Snapshot, not a live
+          ticker.
+        </p>
+      </section>
+
       <section className="flex flex-col gap-3">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="stamp">

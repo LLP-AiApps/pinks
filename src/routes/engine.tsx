@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { formatPct } from "@/lib/odds";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { FactorBars, WeightStrip } from "@/components/factor-bars";
 import { HelpRow } from "@/components/help-tip";
 
 export const Route = createFileRoute("/engine")({ component: EnginePage });
@@ -32,9 +33,8 @@ function EnginePage() {
           <h1 className="font-display text-3xl tracking-tight">Engine</h1>
         </HelpRow>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          100% is the north star, not a claim. Every final is graded. Weights are public. We do not
-          scrape twelve sites on a timer — that is more work than edge. Free, high-signal feeds go
-          into the blend. Duplicates stay off.
+          100% is the north star, not a claim. Every final is graded. Weights are public. This is a
+          snapshot we typed — not a live odds ticker. Wire is the live pull, on demand.
         </p>
       </header>
 
@@ -54,14 +54,17 @@ function EnginePage() {
 
       <section>
         <h2 className="font-display text-xl">Weights</h2>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-3">
-          {Object.entries(WEIGHTS).map(([k, v]) => (
-            <li key={k} className="flex items-center justify-between rounded-lg bg-surface px-4 py-3 text-sm shadow-[var(--shadow-border)]">
-              <span className="capitalize text-muted">{k}</span>
-              <span className="font-mono tabular-nums">{Math.round(v * 100)}%</span>
-            </li>
-          ))}
-        </ul>
+        <p className="mt-2 text-sm text-muted">How much each lane moves the blend. Bars below a game are that game.</p>
+        <div className="mt-3">
+          <WeightStrip weights={WEIGHTS} />
+          <ul className="mt-3 flex flex-wrap gap-3 text-[0.6875rem] uppercase tracking-wide text-muted">
+            {Object.entries(WEIGHTS).map(([k, v]) => (
+              <li key={k}>
+                {k} {Math.round(v * 100)}%
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section className="flex flex-col gap-3">
@@ -153,15 +156,7 @@ function EdgeRow({
       </button>
       {shown ? (
         <div className="rounded-b-xl border-t border-border bg-raised px-4 py-4">
-          <ul className="flex flex-col gap-2">
-            {edge.factors.map((f) => (
-              <li key={f.id} className="grid grid-cols-[7rem_3rem_1fr] items-baseline gap-2 text-sm">
-                <span className="text-muted">{f.label}</span>
-                <span className="font-mono tabular-nums">{Math.round(f.weight * f.score * 100)}</span>
-                <span className="text-muted">{f.note}</span>
-              </li>
-            ))}
-          </ul>
+          <FactorBars factors={edge.factors} />
           <p className="mt-3 text-sm">
             ATS {edge.ats.lean === "yes" ? edge.ats.side : "pass"} · Total {edge.total.lean} · {edge.agree} cappers
             agree.

@@ -22,6 +22,7 @@ import { Route as LegalRouteImport } from './routes/legal'
 import { Route as LetterRouteImport } from './routes/letter'
 import { Route as LogRouteImport } from './routes/log'
 import { Route as ParlaysRouteImport } from './routes/parlays'
+import { Route as PicksRouteImport } from './routes/picks'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as WireRouteImport } from './routes/wire'
@@ -93,6 +94,11 @@ const ParlaysRoute = ParlaysRouteImport.update({
   path: '/parlays',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PicksRoute = PicksRouteImport.update({
+  id: '/picks',
+  path: '/picks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SourcesRoute = SourcesRouteImport.update({
   id: '/sources',
   path: '/sources',
@@ -133,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/letter': typeof LetterRouteWithChildren
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
+  '/picks': typeof PicksRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -153,6 +160,7 @@ export interface FileRoutesByTo {
   '/letter': typeof LetterRouteWithChildren
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
+  '/picks': typeof PicksRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/letter': typeof LetterRouteWithChildren
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
+  '/picks': typeof PicksRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -196,6 +205,7 @@ export interface FileRouteTypes {
     | '/letter'
     | '/log'
     | '/parlays'
+    | '/picks'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/letter'
     | '/log'
     | '/parlays'
+    | '/picks'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '/letter'
     | '/log'
     | '/parlays'
+    | '/picks'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -257,6 +269,7 @@ export interface RootRouteChildren {
   LetterRoute: typeof LetterRouteWithChildren
   LogRoute: typeof LogRoute
   ParlaysRoute: typeof ParlaysRoute
+  PicksRoute: typeof PicksRoute
   SourcesRoute: typeof SourcesRoute
   StudioRoute: typeof StudioRoute
   WireRoute: typeof WireRoute
@@ -355,6 +368,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ParlaysRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/picks': {
+      id: '/picks'
+      path: '/picks'
+      fullPath: '/picks'
+      preLoaderRoute: typeof PicksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sources': {
       id: '/sources'
       path: '/sources'
@@ -428,6 +448,7 @@ const rootRouteChildren: RootRouteChildren = {
   LetterRoute: LetterRouteWithChildren,
   LogRoute: LogRoute,
   ParlaysRoute: ParlaysRoute,
+  PicksRoute: PicksRoute,
   SourcesRoute: SourcesRoute,
   StudioRoute: StudioRoute,
   WireRoute: WireRoute,
