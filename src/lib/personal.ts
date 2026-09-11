@@ -48,7 +48,7 @@ export type PinkTicket = {
 
 const FLOOR: Record<Style, { minProb: number; minConf: number; label: string }> = {
   lock: { minProb: 0.7, minConf: 4, label: "Locks only — 70%+ blend, 4-star desk" },
-  blend: { minProb: 0.62, minConf: 3, label: "Desk + engine. 62% floor." },
+  blend: { minProb: 0.62, minConf: 3, label: "Desk + engine. 62% floor. Extra rungs are marked." },
   flyer: { minProb: 0.58, minConf: 3, label: "Will take a 58% side to fill the extra rungs." },
 };
 
@@ -78,20 +78,24 @@ function personalScore(edge: GameEdge, profile: Profile): { score: number; why: 
 export function buildPinkTicket(profile: Profile, edges = allEdges()): PinkTicket {
   const { minProb, minConf, label } = FLOOR[profile.style];
   const live = edges.filter((e) => e.game.status !== "final");
-  const ranked = live
+  const scored = live
     .map((e) => {
       const p = personalScore(e, profile);
       return { e, ...p };
     })
-    .filter(({ e, score }) => score >= minProb && e.game.confidence >= minConf)
     .sort((a, b) => b.score - a.score || b.e.game.confidence - a.e.game.confidence);
 
-  const take = ranked.slice(0, profile.maxLegs);
+  const above = scored.filter(({ e, score }) => score >= minProb && e.game.confidence >= minConf);
+  const below = scored.filter((row) => !above.includes(row));
+  const preferred = below.filter(({ e }) => e.game.parlaySafe);
+  const rest = below.filter(({ e }) => !e.game.parlaySafe);
+  const take = [...above, ...preferred, ...rest].slice(0, profile.maxLegs);
   const book = BOOKS.find((b) => b.id === profile.book) ?? BOOKS[2]!;
 
-  const legs: PinkLeg[] = take.map(({ e, score, why }) => {
+  const legs: PinkLeg[] = take.map(({ e, score, why }, i) => {
     const g = e.game;
     const ml = e.pick === g.home ? g.mlHome : g.mlAway;
+    const overFloor = score >= minProb && g.confidence >= minConf;
     return {
       gameId: g.id,
       pick: e.pick,
@@ -99,18 +103,21 @@ export function buildPinkTicket(profile: Profile, edges = allEdges()): PinkTicke
       line: `${g.away} @ ${g.home}`,
       matchup: `${g.away} @ ${g.home}`,
       personal: score,
-      why,
+      why: overFloor ? why : `Rung ${i + 1} — below the floor. ${why}`,
     };
   });
 
   const house3 = ["cle-jax", "no-det", "ari-lac"];
   const overlap = legs.filter((l) => house3.includes(l.gameId)).length;
+  const extra = Math.max(0, legs.length - above.length);
   const vsHouse =
     legs.length === 0
-      ? "Nothing cleared your floor. Loosen style or drop a star."
-      : overlap === legs.length
-        ? "Same sides as the house 3-teamer. Your settings did not change the core."
-        : `You overlap the house 3-teamer on ${overlap} of ${legs.length}. The rest is you.`;
+      ? "Nothing left on the board."
+      : extra > 0
+        ? `${above.length} cleared the floor. ${extra} extra rung${extra === 1 ? "" : "s"} filled so this is a ${legs.length}-teamer.`
+        : overlap === legs.length
+          ? "Same sides as the house 3-teamer. Your settings did not change the core."
+          : `You overlap the house 3-teamer on ${overlap} of ${legs.length}. The rest is you.`;
 
   const bookWhy =
     profile.book === "stations"
@@ -120,10 +127,7 @@ export function buildPinkTicket(profile: Profile, edges = allEdges()): PinkTicke
         : "South Point / Rampart same sheet. Best 3–6 moneyline parlay in town.";
 
   return {
-    title:
-      legs.length <= 3
-        ? "Your 3-teamer"
-        : `Your ${legs.length}-teamer`,
+    title: `Your ${legs.length}-teamer`,
     legs,
     book: profile.book,
     bookName: book.name,
