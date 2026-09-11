@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BOOKS } from "@/data/slate";
+import { PUBLIC_ODDS } from "@/data/odds-boards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { HelpRow } from "@/components/help-tip";
@@ -78,7 +79,7 @@ function BooksPage() {
             ) : null}
             <div className="mt-auto flex flex-wrap gap-2">
               <Button size="sm" asChild>
-                <a href={b.oddsUrl} target="_blank" rel="noopener noreferrer">
+                <a href={PUBLIC_ODDS[b.id]} target="_blank" rel="noopener noreferrer">
                   Live odds
                 </a>
               </Button>
