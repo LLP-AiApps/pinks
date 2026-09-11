@@ -23,7 +23,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
       <footer className="no-print border-t border-border px-4 py-8 text-center text-xs text-muted">
         {HOUSE.name} · {HOUSE.tag} Desk snapshot, not a book. 21+. 1-800-GAMBLER.
-        <span className="mt-2 block">{HOUSE.domain} — the door. Live on Netlify until DNS lands.</span>
+        <span className="mt-2 block">{HOUSE.domain} — the door.</span>
         <span className="mt-2 block">
           <Link to="/legal" className="text-accent">
             Legal
