@@ -44,6 +44,14 @@ function HistoryPage() {
     void load();
   }
 
+  const decided = tickets?.filter((t) => t.result === "win" || t.result === "lose" || t.result === "push") ?? [];
+  const wins = decided.filter((t) => t.result === "win").length;
+  const losses = decided.filter((t) => t.result === "lose").length;
+  const pushes = decided.filter((t) => t.result === "push").length;
+  const atRisk = decided.reduce((n, t) => n + (t.stake ?? 0), 0);
+  const lost = decided.filter((t) => t.result === "lose").reduce((n, t) => n + (t.stake ?? 0), 0);
+  const pct = wins + losses ? Math.round((100 * wins) / (wins + losses)) : 0;
+
   if (user === null && tickets === null && !error) {
     return (
       <main className="mx-auto max-w-2xl text-sm text-muted">Opening the book…</main>
@@ -70,10 +78,31 @@ function HistoryPage() {
         </p>
         <h1 className="font-display text-3xl tracking-tight">History</h1>
         <p className="text-sm text-muted">
-          Worksheets you stamped while signed in. Grade them after the window. Not a wager the desk
-          holds.
+          Worksheets you stamped while signed in. Grade them after the window. Compare to the desk
+          on the home page. Not a wager the desk holds.
         </p>
       </header>
+      {tickets?.length ? (
+        <section className="grid gap-3 sm:grid-cols-3">
+          <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">You</p>
+            <p className="mt-1 font-display text-3xl tabular-nums">{pct}%</p>
+            <p className="text-sm text-muted">
+              {wins}–{losses}{pushes ? ` –${pushes}p` : ""} decided tickets
+            </p>
+          </div>
+          <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Staked</p>
+            <p className="mt-1 font-display text-3xl tabular-nums">${atRisk}</p>
+            <p className="text-sm text-muted">On tickets you already graded</p>
+          </div>
+          <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Lost stake</p>
+            <p className="mt-1 font-display text-3xl tabular-nums">${lost}</p>
+            <p className="text-sm text-muted">Wins still need a payout number. Next.</p>
+          </div>
+        </section>
+      ) : null}
       {error ? <p className="text-sm text-risk">{error}</p> : null}
       {!tickets?.length ? (
         <p className="text-sm text-muted">
