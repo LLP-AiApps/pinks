@@ -22,23 +22,26 @@ export function Shell({ children }: { children: ReactNode }) {
       </header>
       <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8">{children}</div>
       <footer className="no-print border-t border-border px-4 py-8 text-center text-xs text-muted">
-        {HOUSE.name} · {HOUSE.tag} Desk snapshot, not a book. 21+. 1-800-GAMBLER.
-        <span className="mt-2 block">{HOUSE.domain} — the door.</span>
+        {HOUSE.name} · {HOUSE.tag} Snapshot, not a shop. 21+. 1-800-GAMBLER.
+        <span className="mt-2 block">{HOUSE.domain}</span>
+        <span className="mt-2 block max-w-xl mx-auto leading-relaxed">
+          Do not make a money decision drunk or high. This site is closer to a paper than a cashier.
+        </span>
         <span className="mt-2 block">
           <Link to="/legal" className="text-accent">
             Legal
           </Link>
           {" · "}
-          <Link to="/join" className="text-accent">
-            Join
+          <Link to="/help" className="text-accent">
+            How this works
           </Link>
           {" · "}
-          <Link to="/learn" className="text-accent">
-            Learn
+          <Link to="/terms" className="text-accent">
+            Words
           </Link>
           {" · "}
-          <Link to="/sources" className="text-accent">
-            Sources
+          <Link to="/ask" className="text-accent">
+            Ask
           </Link>
         </span>
       </footer>

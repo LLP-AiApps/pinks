@@ -10,27 +10,27 @@ const PRIMARY = [
 ] as const;
 
 const BOARD = [
-  { to: "/analysts", label: "Analysts" },
-  { to: "/engine", label: "Engine" },
-  { to: "/wire", label: "Wire" },
-  { to: "/books", label: "Books" },
+  { to: "/analysts", label: "Other writers" },
+  { to: "/engine", label: "The computer" },
+  { to: "/wire", label: "Late news" },
+  { to: "/books", label: "Shops" },
   { to: "/card", label: "Pool card" },
 ] as const;
 
 const LETTER = [
-  { to: "/letter", label: "The letter" },
+  { to: "/letter", label: "Write-up" },
   { to: "/learn", label: "Learn" },
-  { to: "/help", label: "How to use" },
-  { to: "/log", label: "What’s new" },
+  { to: "/help", label: "How this works" },
+  { to: "/terms", label: "Words" },
+  { to: "/ask", label: "Ask" },
+  { to: "/log", label: "What happened" },
   { to: "/sources", label: "Sources" },
-  { to: "/studio", label: "Studio" },
 ] as const;
 
 const JOIN = [
   { to: "/join", label: "Join" },
   { to: "/login", label: "Sign in" },
-  { to: "/history", label: "History" },
-  { to: "/roster", label: "Roster" },
+  { to: "/history", label: "Your tickets" },
   { to: "/legal", label: "Legal" },
 ] as const;
 
