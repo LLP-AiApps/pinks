@@ -54,15 +54,15 @@ function HistoryPage() {
 
   if (user === null && tickets === null && !error) {
     return (
-      <main className="mx-auto max-w-2xl text-sm text-muted">Opening the book…</main>
+      <main className="mx-auto max-w-2xl text-sm text-muted">Opening your tickets…</main>
     );
   }
 
   if (!user) {
     return (
       <main className="mx-auto flex max-w-lg flex-col gap-4">
-        <h1 className="font-display text-3xl tracking-tight">History</h1>
-        <p className="text-sm text-muted">Sign in to see tickets saved off this phone.</p>
+        <h1 className="font-display text-3xl tracking-tight">Your tickets</h1>
+        <p className="text-sm text-muted">Sign in so slips follow you to another phone.</p>
         <Button asChild>
           <Link to="/login">Sign in</Link>
         </Button>
@@ -74,45 +74,45 @@ function HistoryPage() {
     <main className="mx-auto flex max-w-2xl flex-col gap-6">
       <header className="flex flex-col gap-2">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          {user.name} · season book
+          {user.name} · your year
         </p>
-        <h1 className="font-display text-3xl tracking-tight">History</h1>
+        <h1 className="font-display text-3xl tracking-tight">Your tickets</h1>
         <p className="text-sm text-muted">
-          Worksheets you stamped while signed in. Grade them after the window. Compare to the desk
-          on the home page. Not a wager the desk holds.
+          This list is only what you saved. It is not our score on the home page. After the games,
+          tap win, lose, or tie.
         </p>
       </header>
       {tickets?.length ? (
         <section className="grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">You</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Your record</p>
             <p className="mt-1 font-display text-3xl tabular-nums">{pct}%</p>
             <p className="text-sm text-muted">
-              {wins}–{losses}{pushes ? ` –${pushes}p` : ""} decided tickets
+              {wins} won · {losses} lost{pushes ? ` · ${pushes} tie` : ""}
             </p>
           </div>
           <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">Staked</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Dollars on graded slips</p>
             <p className="mt-1 font-display text-3xl tabular-nums">${atRisk}</p>
-            <p className="text-sm text-muted">On tickets you already graded</p>
+            <p className="text-sm text-muted">What you wrote as the stake</p>
           </div>
           <div className="rounded-xl bg-surface p-4 shadow-[var(--shadow-border)]">
             <p className="font-mono text-xs uppercase tracking-widest text-muted">Lost stake</p>
             <p className="mt-1 font-display text-3xl tabular-nums">${lost}</p>
-            <p className="text-sm text-muted">Wins still need a payout number. Next.</p>
+            <p className="text-sm text-muted">Wins will get a payout box next.</p>
           </div>
         </section>
       ) : null}
       {error ? <p className="text-sm text-risk">{error}</p> : null}
       {!tickets?.length ? (
         <p className="text-sm text-muted">
-          No slips yet. Build one on{" "}
+          None yet. Make one under{" "}
           <Link to="/picks" className="text-accent">
-            Yours
+            Build your ticket
           </Link>{" "}
           or{" "}
           <Link to="/parlays" className="text-accent">
-            Parlays
+            Ready-made tickets
           </Link>
           , then Save pink ticket.
         </p>
@@ -127,7 +127,7 @@ function HistoryPage() {
                 <span className="font-mono text-xs uppercase text-muted">{t.result}</span>
               </div>
               <p className="mt-1 text-sm text-muted">
-                {t.book || "window TBD"}
+                {t.book || "shop TBD"}
                 {t.stake ? ` · $${t.stake}` : ""}
               </p>
               <ul className="mt-3 flex flex-col gap-1 text-sm">
@@ -141,7 +141,7 @@ function HistoryPage() {
               <div className="mt-3 flex flex-wrap gap-2">
                 {(["win", "lose", "push", "open"] as const).map((r) => (
                   <Button key={r} size="sm" variant={t.result === r ? "default" : "outline"} onClick={() => void grade(t.id, r)}>
-                    {r}
+                    {r === "push" ? "tie" : r}
                   </Button>
                 ))}
               </div>
