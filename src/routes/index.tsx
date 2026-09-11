@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CARD_OVERS, GAMES, SNAPSHOT, BOOKS } from "@/data/slate";
+import { PUBLIC_ODDS } from "@/data/odds-boards";
 import { PRESETS } from "@/data/parlays";
 import { CHANGELOG } from "@/data/changelog";
 import { HOUSE } from "@/data/house";
@@ -103,7 +104,7 @@ function Home() {
           {BOOKS.map((b) => (
             <li key={b.id}>
               <a
-                href={b.oddsUrl}
+                href={PUBLIC_ODDS[b.id]}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex min-h-11 items-center justify-between gap-2 rounded-lg bg-surface px-3 py-2 text-sm shadow-[var(--shadow-border)] hover:text-accent"
