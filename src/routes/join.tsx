@@ -23,14 +23,15 @@ function JoinPage() {
     hydrate();
   }, [hydrate]);
 
+  const n = JOIN_CHECKS.length;
   const checkedCount = JOIN_CHECKS.filter((c) => checks[c.id]).length;
-  const allChecked = checkedCount === JOIN_CHECKS.length;
+  const allChecked = checkedCount === n;
 
   async function submit() {
     setError("");
     setDeskNote("");
     if (!allChecked) {
-      setError(`Check every box. ${checkedCount} of ${JOIN_CHECKS.length} so far.`);
+      setError(`Check every box. ${checkedCount} of ${n} so far.`);
       return;
     }
     if (!name.trim()) {
@@ -80,7 +81,7 @@ function JoinPage() {
           {record.channel}.
         </p>
         <p className="text-sm text-muted">
-          Next: set a password on Sign in so tickets save to the desk, not just this phone.
+          Next: set a password on Sign in so tickets save off this phone.
         </p>
         {deskNote ? <p className="text-sm text-muted">{deskNote}</p> : null}
         <div className="flex flex-wrap gap-2">
@@ -88,7 +89,7 @@ function JoinPage() {
             <Link to="/login">Sign in / set password</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/history">History</Link>
+            <Link to="/history">Your tickets</Link>
           </Button>
           <Button variant="outline" onClick={leave}>
             Leave the list
@@ -108,15 +109,15 @@ function JoinPage() {
           <h1 className="font-display text-3xl tracking-tight">Join</h1>
         </HelpRow>
         <p className="text-sm leading-relaxed text-muted">
-          Puts your name on the desk list. Then{" "}
+          Name on the list. Then{" "}
           <Link to="/login" className="text-accent">
             Sign in
-          </Link>{" "}
-          to set a password and keep weekly tickets. Read{" "}
+          </Link>
+          . Read{" "}
           <Link to="/legal" className="text-accent">
             Legal
-          </Link>{" "}
-          first. Mailer stays dark.
+          </Link>
+          . Mailer stays off.
         </p>
       </header>
 
@@ -134,7 +135,6 @@ function JoinPage() {
             onChange={(e) => setName(e.target.value)}
             className="h-11 rounded-md bg-surface px-3 shadow-[var(--shadow-border)]"
             autoComplete="name"
-            placeholder="How we should list you"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -145,7 +145,6 @@ function JoinPage() {
             onChange={(e) => setEmail(e.target.value)}
             className="h-11 rounded-md bg-surface px-3 shadow-[var(--shadow-border)]"
             autoComplete="email"
-            placeholder="you@email.com"
             required
           />
         </label>
@@ -157,7 +156,6 @@ function JoinPage() {
             onChange={(e) => setPhone(e.target.value)}
             className="h-11 rounded-md bg-surface px-3 shadow-[var(--shadow-border)]"
             autoComplete="tel"
-            placeholder="702…"
           />
         </label>
         <fieldset className="flex flex-col gap-2 text-sm">
@@ -202,8 +200,8 @@ function JoinPage() {
         </Button>
         <p className="text-xs text-muted">
           {allChecked
-            ? "All six boxes checked. Still no email, no text."
-            : `${checkedCount} of ${JOIN_CHECKS.length} boxes. Sign stays off until all six. 21+. 1-800-GAMBLER.`}
+            ? `All ${n} boxes checked. Still no email.`
+            : `${checkedCount} of ${n} boxes. 21+. 1-800-GAMBLER.`}
         </p>
       </form>
     </main>
