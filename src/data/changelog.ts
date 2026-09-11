@@ -14,6 +14,15 @@ export type LogEntry = {
 
 export const CHANGELOG: LogEntry[] = [
   {
+    id: "2026-09-11-roster",
+    at: "2026-09-11T01:06:00-07:00",
+    day: "Fri Sep 11",
+    time: "1:06 AM PT",
+    kind: "ship",
+    title: "Desk roster — emails, house door",
+    body: "Join writes the list to the desk database, not just this phone. Join ▾ Roster. House code. Mailer still dark. DNS later — pinksdesk.com and pinks.vegas look open on RDAP.",
+  },
+  {
     id: "2026-09-11-algos",
     at: "2026-09-11T00:55:00-07:00",
     day: "Fri Sep 11",

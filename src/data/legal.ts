@@ -1,7 +1,7 @@
 /** Draft house terms. Not a substitute for a lawyer. Dated so we can version them. */
 
-export const LEGAL_VERSION = "2026-09-10-b";
-export const LEGAL_UPDATED = "September 10, 2026";
+export const LEGAL_VERSION = "2026-09-11-a";
+export const LEGAL_UPDATED = "September 11, 2026";
 
 export const LEGAL_SECTIONS: { id: string; title: string; body: string }[] = [
   {
@@ -37,7 +37,7 @@ export const LEGAL_SECTIONS: { id: string; title: string; body: string }[] = [
   {
     id: "letter",
     title: "The letter, email, and text",
-    body: "The letter lives on this site first. Email and SMS are optional and are OFF until we turn the mailer on. Joining now is consent to be considered for that list, not a blast today. We will not send a marketing text or email until (1) you have checked every box on Join, (2) the mailer status on Join says live, and (3) you can see how to stop. We do not sell the list. We do not rent the list.",
+    body: "The letter lives on this site first. Email and SMS are optional and are OFF until we turn the mailer on. Joining now stores your name, email, and (if you gave it) phone on the desk roster so it is not trapped in one browser. That is consent to be considered for the list, not a blast today. We will not send a marketing text or email until (1) you have checked every box on Join, (2) the mailer status on Join says live, and (3) you can see how to stop. We do not sell the list. We do not rent the list. The roster is behind a house code. If the GitHub repo is public, that code is a family door, not a vault.",
   },
   {
     id: "tcpa",
@@ -99,7 +99,7 @@ export const JOIN_CHECKS: { id: string; label: string; required: true }[] = [
   },
   {
     id: "terms",
-    label: "I have read the Terms, Responsible Gaming, education, and privacy notes (Legal), version 2026-09-10-b.",
+    label: "I have read the Terms, Responsible Gaming, education, and privacy notes (Legal), version 2026-09-11-a.",
     required: true,
   },
   {

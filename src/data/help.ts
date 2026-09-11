@@ -162,6 +162,11 @@ export const HELP = {
       "Save pink ticket prints the worksheet.",
     ],
   },
+  roster: {
+    title: "Roster",
+    body: "House door. Emails live on the desk, not one phone. Mailer is still dark.",
+    steps: ["Type the house code.", "Tap Open roster.", "Do not leave this up on a bar TV."],
+  },
 } as const;
 
 export type HelpId = keyof typeof HELP;
@@ -182,6 +187,7 @@ export const HELP_ORDER: HelpId[] = [
   "learn",
   "sources",
   "picks",
+  "roster",
   "log",
   "studio",
 ];

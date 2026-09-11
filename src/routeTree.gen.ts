@@ -23,6 +23,7 @@ import { Route as LetterRouteImport } from './routes/letter'
 import { Route as LogRouteImport } from './routes/log'
 import { Route as ParlaysRouteImport } from './routes/parlays'
 import { Route as PicksRouteImport } from './routes/picks'
+import { Route as RosterRouteImport } from './routes/roster'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as WireRouteImport } from './routes/wire'
@@ -99,6 +100,11 @@ const PicksRoute = PicksRouteImport.update({
   path: '/picks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RosterRoute = RosterRouteImport.update({
+  id: '/roster',
+  path: '/roster',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SourcesRoute = SourcesRouteImport.update({
   id: '/sources',
   path: '/sources',
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
   '/picks': typeof PicksRoute
+  '/roster': typeof RosterRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
   '/picks': typeof PicksRoute
+  '/roster': typeof RosterRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/log': typeof LogRoute
   '/parlays': typeof ParlaysRoute
   '/picks': typeof PicksRoute
+  '/roster': typeof RosterRoute
   '/sources': typeof SourcesRoute
   '/studio': typeof StudioRoute
   '/wire': typeof WireRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/log'
     | '/parlays'
     | '/picks'
+    | '/roster'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/log'
     | '/parlays'
     | '/picks'
+    | '/roster'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/log'
     | '/parlays'
     | '/picks'
+    | '/roster'
     | '/sources'
     | '/studio'
     | '/wire'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   LogRoute: typeof LogRoute
   ParlaysRoute: typeof ParlaysRoute
   PicksRoute: typeof PicksRoute
+  RosterRoute: typeof RosterRoute
   SourcesRoute: typeof SourcesRoute
   StudioRoute: typeof StudioRoute
   WireRoute: typeof WireRoute
@@ -375,6 +388,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PicksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roster': {
+      id: '/roster'
+      path: '/roster'
+      fullPath: '/roster'
+      preLoaderRoute: typeof RosterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sources': {
       id: '/sources'
       path: '/sources'
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   LogRoute: LogRoute,
   ParlaysRoute: ParlaysRoute,
   PicksRoute: PicksRoute,
+  RosterRoute: RosterRoute,
   SourcesRoute: SourcesRoute,
   StudioRoute: StudioRoute,
   WireRoute: WireRoute,

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { JOIN_CHECKS, LEGAL_VERSION } from "@/data/legal";
 import { MAILER_STATUS, useJoin } from "@/store/join";
+import { addMember } from "@/lib/members";
 import { HelpRow } from "@/components/help-tip";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
@@ -15,6 +16,7 @@ function JoinPage() {
   const [channel, setChannel] = useState<"email" | "sms" | "both" | "app">("email");
   const [checks, setChecks] = useState<Record<string, boolean>>({});
   const [error, setError] = useState("");
+  const [deskNote, setDeskNote] = useState("");
 
   useEffect(() => {
     hydrate();
@@ -22,14 +24,15 @@ function JoinPage() {
 
   const allChecked = JOIN_CHECKS.every((c) => checks[c.id]);
 
-  function submit() {
+  async function submit() {
     setError("");
+    setDeskNote("");
     if (!allChecked) {
       setError("Every box has to be checked. That is the point.");
       return;
     }
-    if (channel !== "app" && channel !== "sms" && !email.includes("@")) {
-      setError("Email is required for the letter.");
+    if (!email.includes("@")) {
+      setError("Email is required so the desk roster is not empty.");
       return;
     }
     if ((channel === "sms" || channel === "both") && phone.replace(/\D/g, "").length < 10) {
@@ -37,6 +40,20 @@ function JoinPage() {
       return;
     }
     sign({ name: name.trim(), email: email.trim(), phone: phone.trim(), channel });
+    const out = (await addMember({
+      data: {
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        channel,
+        version: LEGAL_VERSION,
+      },
+    })) as { ok: true; source?: string } | { ok: false; error: string };
+    if (!out.ok) {
+      setDeskNote(`On this phone. Desk list: ${out.error}`);
+    } else if (out.source === "pglite") {
+      setDeskNote("On this phone, and on the preview desk (memory). The public site needs the database live — that’s the next wire.");
+    }
   }
 
   if (record) {
@@ -50,9 +67,10 @@ function JoinPage() {
           emailed or texted. Version you signed: {record.version}. Channel: {record.channel}.
         </p>
         <p className="text-sm text-muted">
-          Learn is unlocked on this phone. When we turn the mailer on, this page will say live and we
-          will ask you to confirm again. Until then the letter is only on the site. Tuition is $0.
+          Learn is unlocked on this phone. Your name is also on the desk roster (not just this
+          browser). Mailer still dark. Tuition is $0.
         </p>
+        {deskNote ? <p className="text-sm text-risk">{deskNote}</p> : null}
         <div className="flex flex-wrap gap-2">
           <Button asChild>
             <Link to="/learn">Open Learn</Link>
