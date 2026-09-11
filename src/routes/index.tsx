@@ -19,14 +19,13 @@ function Home() {
   const rec = seasonRecord();
   const deskN = rec.desk.w + rec.desk.l;
   const deskPct = deskN ? rec.desk.w / deskN : 0;
-  const engN = rec.engine.su.w + rec.engine.su.l;
   const engPct = rec.engine.su.pct;
   const desk = `${rec.desk.w}–${rec.desk.l}`;
   return (
     <main className="flex flex-col gap-10">
       <section className="flex flex-col gap-4">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
-          {HOUSE.name} · {HOUSE.tag}
+          {HOUSE.name} · scoreboard, not a shop
         </p>
         <HelpRow id="desk">
           <h1 className="max-w-3xl font-display text-4xl leading-[1.1] tracking-tight sm:text-5xl">
@@ -34,53 +33,58 @@ function Home() {
           </h1>
         </HelpRow>
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
-          {HOUSE.line} Circa and South Point first. Wire for the last hour. Not on page load.
+          We write down who we think wins. You can copy that, change it, and keep score here. We do
+          not take your money. You must be 21.
         </p>
       </section>
 
       <section className="rounded-xl bg-surface p-6 shadow-[var(--shadow-border)]">
-        <p className="font-mono text-xs uppercase tracking-widest text-muted">Season board · straight up</p>
-        <div className="mt-4 grid gap-6 sm:grid-cols-3">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">Games that already ended</p>
+        <p className="mt-2 max-w-2xl text-sm text-muted">
+          Only finished games count. Two have finished. We got one right and one wrong. That is why
+          you see 50%. Next Sunday this number will move.
+        </p>
+        <div className="mt-6 grid gap-6 sm:grid-cols-3">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">Desk</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Our written picks</p>
             <p className="mt-1 font-display text-5xl tabular-nums">{formatPct(deskPct)}</p>
             <p className="mt-1 text-sm text-muted">
-              {desk} after {deskN} final{deskN === 1 ? "" : "s"}. Printed card. Misses stay.
+              {rec.desk.w} right · {rec.desk.l} wrong. Seattle hit. Los Angeles miss. Misses stay up.
             </p>
           </div>
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">Engine</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">The computer</p>
             <p className="mt-1 font-display text-5xl tabular-nums">{formatPct(engPct)}</p>
             <p className="mt-1 text-sm text-muted">
-              {rec.engine.su.w}–{rec.engine.su.l} SU. Same games, colder blend.
+              {rec.engine.su.w} right · {rec.engine.su.l} wrong. Same games. Math, not a feeling.
             </p>
           </div>
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-muted">You</p>
-            <p className="mt-1 font-display text-3xl">History</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Your tickets</p>
+            <p className="mt-1 font-display text-3xl">Keep score</p>
             <p className="mt-1 text-sm text-muted">
-              Grade your slips. Compare to the desk when you fade us.
+              Slips you saved. Mark win or lose after the game. That is your year, separate from ours.
             </p>
             <Button className="mt-3" size="sm" asChild>
-              <Link to="/history">Open your book</Link>
+              <Link to="/history">Open your tickets</Link>
             </Button>
           </div>
         </div>
       </section>
 
       <section className="grid gap-3 sm:grid-cols-3">
-        <Stat label="Desk SU" value={desk} hint="SEA hit · LAR miss · climb starts here" />
-        <Stat label="MNF total" value="41" hint="KC 24 · DEN 17 · Over 37½" />
-        <Stat label="TNF" value="SF 27–7" hint="Under cashed · travel spot" />
+        <Stat label="Score so far" value={desk} hint="1 right, 1 wrong after two finals" />
+        <Stat label="Monday night" value="41" hint="Kansas City 24, Denver 17" />
+        <Stat label="Thursday" value="SF 27–7" hint="San Francisco won in Australia" />
       </section>
 
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="letter">
-            <h2 className="text-2xl">The letter</h2>
+            <h2 className="text-2xl">Today’s write-up</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/letter">All letters</Link>
+            <Link to="/letter">All write-ups</Link>
           </Button>
         </div>
         <Link
@@ -99,39 +103,38 @@ function Home() {
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="learn">
-            <h2 className="text-2xl">Learn</h2>
+            <h2 className="text-2xl">Learn first</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/learn">School</Link>
+            <Link to="/learn">Open school</Link>
           </Button>
         </div>
         <p className="text-sm text-muted">
-          Ladder, hedge, Grok vs humans. Educational. Not a lock.
+          What a ticket is. Why more games is riskier. How to cover a weak pick. Short lessons.
         </p>
       </section>
 
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="picks">
-            <h2 className="text-2xl">Yours</h2>
+            <h2 className="text-2xl">Build your ticket</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/picks">Pink Ticket</Link>
+            <Link to="/picks">Start with 3 games</Link>
           </Button>
         </div>
         <p className="text-sm text-muted">
-          Personalized ladder from the same blend. Your floor, your window. Snapshot, not a live
-          ticker.
+          Same games we used. You choose how picky to be and how many games. Save it. Grade it later.
         </p>
       </section>
 
       <section className="flex flex-col gap-3">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="stamp">
-            <h2 className="text-2xl">Stamp it</h2>
+            <h2 className="text-2xl">Look at a real board</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/books">All windows</Link>
+            <Link to="/books">All shops</Link>
           </Button>
         </div>
         <ul className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -154,10 +157,10 @@ function Home() {
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="whatsnew">
-            <h2 className="text-2xl">What’s new</h2>
+            <h2 className="text-2xl">What just happened</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/log">Full log</Link>
+            <Link to="/log">Full list</Link>
           </Button>
         </div>
         <ol className="flex flex-col gap-2">
@@ -180,10 +183,10 @@ function Home() {
       <section className="flex flex-col gap-4">
         <div className="flex items-end justify-between gap-4">
           <HelpRow id="ladder">
-            <h2 className="text-2xl">Parlay ladder</h2>
+            <h2 className="text-2xl">Ready-made tickets</h2>
           </HelpRow>
           <Button variant="outline" size="sm" asChild>
-            <Link to="/parlays">Parlays</Link>
+            <Link to="/parlays">Build one</Link>
           </Button>
         </div>
         <div className="grid gap-3 md:grid-cols-2">
@@ -195,7 +198,7 @@ function Home() {
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs uppercase tracking-widest text-muted">
-                  {p.legs} team
+                  {p.legs} games
                 </span>
                 <Badge tone="accent">{p.book}</Badge>
               </div>
@@ -208,7 +211,7 @@ function Home() {
 
       <section className="flex flex-col gap-4">
         <HelpRow id="locks">
-          <h2 className="text-2xl">High-confidence sides</h2>
+          <h2 className="text-2xl">Games we like most this week</h2>
         </HelpRow>
         <ul className="divide-y divide-border rounded-xl bg-surface shadow-[var(--shadow-border)]">
           {locks.map((g) => (
@@ -235,38 +238,35 @@ function Home() {
 
       <section className="rounded-xl bg-surface p-5 shadow-[var(--shadow-border)]">
         <HelpRow id="wire-home">
-          <h2 className="text-xl">Live Grok wire</h2>
+          <h2 className="text-xl">Late news</h2>
         </HelpRow>
         <p className="mt-2 text-sm text-muted">
-          Grok has native X search. Perplexity does not. Pull only when you need it so we do not
-          spend the key on every refresh.
+          Tap only when you need the last hour. It does not refresh by itself.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Button asChild>
-            <Link to="/wire">Open wire</Link>
+            <Link to="/wire">Open late news</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/engine">Open engine</Link>
-          </Button>
-          <Button variant="outline" asChild>
-            <Link to="/studio">Open studio</Link>
+            <Link to="/engine">See the computer</Link>
           </Button>
         </div>
       </section>
 
       <section className="rounded-xl bg-surface p-5 shadow-[var(--shadow-border)]">
         <HelpRow id="pool-home">
-          <h2 className="text-xl">Pool card — blot these</h2>
+          <h2 className="text-xl">Bar pool card</h2>
         </HelpRow>
         <p className="mt-1 text-sm text-muted">
-          Ties win. Tiebreaker is closest to Monday night total. Write {SNAPSHOT.mnfTotal}.
+          A different kind of sheet. Mark every game. A tie counts. Closest Monday night total wins
+          the leftover. Write {SNAPSHOT.mnfTotal}.
         </p>
         <p className="mt-4 font-mono text-sm leading-relaxed tabular-nums">
           {SNAPSHOT.cardBlots.join("  ·  ")}
         </p>
         <p className="mt-3 text-sm text-muted">
-          Sunday {CARD_OVERS.sunday.pick} {CARD_OVERS.sunday.line} (square {CARD_OVERS.sunday.over}).
-          Monday {CARD_OVERS.monday.pick} {CARD_OVERS.monday.line} (square {CARD_OVERS.monday.over}).
+          Sunday {CARD_OVERS.sunday.pick} {CARD_OVERS.sunday.line}. Monday {CARD_OVERS.monday.pick}{" "}
+          {CARD_OVERS.monday.line}.
         </p>
         <Button className="mt-4" asChild>
           <Link to="/card">Full card</Link>
