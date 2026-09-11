@@ -17,6 +17,10 @@ function Home() {
   const live = GAMES.filter((g) => g.status !== "final");
   const locks = live.filter((g) => g.confidence >= 4 && g.parlaySafe);
   const rec = seasonRecord();
+  const deskN = rec.desk.w + rec.desk.l;
+  const deskPct = deskN ? rec.desk.w / deskN : 0;
+  const engN = rec.engine.su.w + rec.engine.su.l;
+  const engPct = rec.engine.su.pct;
   const desk = `${rec.desk.w}–${rec.desk.l}`;
   return (
     <main className="flex flex-col gap-10">
@@ -32,6 +36,36 @@ function Home() {
         <p className="max-w-2xl text-sm leading-relaxed text-muted">
           {HOUSE.line} Circa and South Point first. Wire for the last hour. Not on page load.
         </p>
+      </section>
+
+      <section className="rounded-xl bg-surface p-6 shadow-[var(--shadow-border)]">
+        <p className="font-mono text-xs uppercase tracking-widest text-muted">Season board · straight up</p>
+        <div className="mt-4 grid gap-6 sm:grid-cols-3">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Desk</p>
+            <p className="mt-1 font-display text-5xl tabular-nums">{formatPct(deskPct)}</p>
+            <p className="mt-1 text-sm text-muted">
+              {desk} after {deskN} final{deskN === 1 ? "" : "s"}. Printed card. Misses stay.
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">Engine</p>
+            <p className="mt-1 font-display text-5xl tabular-nums">{formatPct(engPct)}</p>
+            <p className="mt-1 text-sm text-muted">
+              {rec.engine.su.w}–{rec.engine.su.l} SU. Same games, colder blend.
+            </p>
+          </div>
+          <div>
+            <p className="font-mono text-xs uppercase tracking-widest text-muted">You</p>
+            <p className="mt-1 font-display text-3xl">History</p>
+            <p className="mt-1 text-sm text-muted">
+              Grade your slips. Compare to the desk when you fade us.
+            </p>
+            <Button className="mt-3" size="sm" asChild>
+              <Link to="/history">Open your book</Link>
+            </Button>
+          </div>
+        </div>
       </section>
 
       <section className="grid gap-3 sm:grid-cols-3">
@@ -72,7 +106,7 @@ function Home() {
           </Button>
         </div>
         <p className="text-sm text-muted">
-          Ladder, hedge, Grok vs humans. Members only on the teaching. Join is free. Not a lock.
+          Ladder, hedge, Grok vs humans. Educational. Not a lock.
         </p>
       </section>
 
