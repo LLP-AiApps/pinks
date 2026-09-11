@@ -17,43 +17,55 @@ function JoinPage() {
   const [checks, setChecks] = useState<Record<string, boolean>>({});
   const [error, setError] = useState("");
   const [deskNote, setDeskNote] = useState("");
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     hydrate();
   }, [hydrate]);
 
-  const allChecked = JOIN_CHECKS.every((c) => checks[c.id]);
+  const checkedCount = JOIN_CHECKS.filter((c) => checks[c.id]).length;
+  const allChecked = checkedCount === JOIN_CHECKS.length;
 
   async function submit() {
     setError("");
     setDeskNote("");
     if (!allChecked) {
-      setError("Every box has to be checked. That is the point.");
+      setError(`Check every box. ${checkedCount} of ${JOIN_CHECKS.length} so far.`);
+      return;
+    }
+    if (!name.trim()) {
+      setError("Name — so the list is not a pile of emails.");
       return;
     }
     if (!email.includes("@")) {
-      setError("Email is required so the desk roster is not empty.");
+      setError("A real email. We will not send until the mailer is live.");
       return;
     }
     if ((channel === "sms" || channel === "both") && phone.replace(/\D/g, "").length < 10) {
-      setError("A real U.S. number is required for text — when the mailer is live.");
+      setError("A real U.S. number if you want text later.");
       return;
     }
+    setBusy(true);
     sign({ name: name.trim(), email: email.trim(), phone: phone.trim(), channel });
-    const out = (await addMember({
-      data: {
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        channel,
-        version: LEGAL_VERSION,
-      },
-    })) as { ok: true; source?: string } | { ok: false; error: string };
-    if (!out.ok) {
-      setDeskNote(`On this phone. Desk list: ${out.error}`);
-    } else if (out.source === "pglite") {
-      setDeskNote("On this phone, and on the preview desk (memory). The public site needs the database live — that’s the next wire.");
+    try {
+      const out = (await addMember({
+        data: {
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          channel,
+          version: LEGAL_VERSION,
+        },
+      })) as { ok: true; source?: string } | { ok: false; error: string };
+      if (!out.ok) {
+        setDeskNote("On this phone. The shared desk list is not wired on the public site yet.");
+      } else if (out.source === "pglite") {
+        setDeskNote("On this phone, and in preview memory. Public roster still waits on the database.");
+      }
+    } catch {
+      setDeskNote("On this phone. The shared desk list is not wired on the public site yet.");
     }
+    setBusy(false);
   }
 
   if (record) {
@@ -63,14 +75,15 @@ function JoinPage() {
           <h1 className="font-display text-3xl tracking-tight">You’re on the list</h1>
         </HelpRow>
         <p className="rounded-xl bg-surface p-5 text-sm leading-relaxed shadow-[var(--shadow-border)]">
-          Mailer status: <span className="text-accent">{record.mailer}</span>. Nothing has been
-          emailed or texted. Version you signed: {record.version}. Channel: {record.channel}.
+          Mailer: <span className="text-accent">{record.mailer}</span>. We have not emailed or
+          texted {record.email || "you"}. Version signed: {record.version}. Reach you later by:{" "}
+          {record.channel}.
         </p>
         <p className="text-sm text-muted">
-          Learn is unlocked on this phone. Your name is also on the desk roster (not just this
-          browser). Mailer still dark. Tuition is $0.
+          That is a name on this phone. Not a blast. Not a charge. Learn is already open to
+          everyone. Tuition is $0.
         </p>
-        {deskNote ? <p className="text-sm text-risk">{deskNote}</p> : null}
+        {deskNote ? <p className="text-sm text-muted">{deskNote}</p> : null}
         <div className="flex flex-wrap gap-2">
           <Button asChild>
             <Link to="/learn">Open Learn</Link>
@@ -96,11 +109,12 @@ function JoinPage() {
           <h1 className="font-display text-3xl tracking-tight">Join</h1>
         </HelpRow>
         <p className="text-sm leading-relaxed text-muted">
+          Puts your name on the desk list on this phone. Does not send mail. Does not charge you.
           Read{" "}
           <Link to="/legal" className="text-accent">
             Legal
           </Link>{" "}
-          first. Check every box. We will not send email or text until the mailer is live.
+          first, then every box.
         </p>
       </header>
 
@@ -108,7 +122,7 @@ function JoinPage() {
         className="flex flex-col gap-4"
         onSubmit={(e) => {
           e.preventDefault();
-          submit();
+          void submit();
         }}
       >
         <label className="flex flex-col gap-1 text-sm">
@@ -118,6 +132,7 @@ function JoinPage() {
             onChange={(e) => setName(e.target.value)}
             className="h-11 rounded-md bg-surface px-3 shadow-[var(--shadow-border)]"
             autoComplete="name"
+            placeholder="How we should list you"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -128,6 +143,8 @@ function JoinPage() {
             onChange={(e) => setEmail(e.target.value)}
             className="h-11 rounded-md bg-surface px-3 shadow-[var(--shadow-border)]"
             autoComplete="email"
+            placeholder="you@email.com"
+            required
           />
         </label>
         <label className="flex flex-col gap-1 text-sm">
@@ -178,11 +195,13 @@ function JoinPage() {
           ))}
         </ul>
         {error ? <p className="text-sm text-risk">{error}</p> : null}
-        <Button type="submit" disabled={!allChecked}>
-          Sign Join
+        <Button type="submit" disabled={!allChecked || busy}>
+          {busy ? "Saving…" : "Sign Join — mailer stays dark"}
         </Button>
         <p className="text-xs text-muted">
-          Disabled until every box is checked. 21+. 1-800-GAMBLER.
+          {allChecked
+            ? "All six boxes checked. Still no email, no text."
+            : `${checkedCount} of ${JOIN_CHECKS.length} boxes. Sign stays off until all six. 21+. 1-800-GAMBLER.`}
         </p>
       </form>
     </main>
