@@ -10,6 +10,36 @@ export type LetterPost = {
 
 export const POSTS: LetterPost[] = [
   {
+    slug: "week-2-sunday-bag-mnf",
+    date: "2026-09-21",
+    day: "Mon Sep 21",
+    kicker: "Week 2",
+    title: "Week 2 through Sunday: 9–6. Season 21–10. MNF open.",
+    teaser:
+      "Desk 9–6 SU after TNF + Sunday. Ladder SF/BAL/TB died on chalk. BUF −3 cashed. Tonight NYG @ LAR — desk LAR, write 44, leave pending.",
+    body: [
+      "Week 2 is graded through Sunday and Thursday night. Fifteen games. PinksDesk 9–6 straight up. Add Week 1's 12–4 and the season sits 21–10 before Monday night.",
+      "The ladder died early. Tampa Bay lost to Cleveland 23–19. Baltimore lost to New Orleans 24–17. San Francisco still cashed 35–13 as a single. Buffalo opened the week right: 41–31, covered −3.",
+      "Other hits: Cincinnati, Green Bay in OT, Philadelphia (SU only), New England, Dallas, Seattle with Lock, Kansas City in OT. Misses that stay posted: Atlanta, Chicago (Murray OUT slog), Chargers (hedged off the naked ticket — process held), Jacksonville at altitude.",
+      "Monday night is still open. Giants at Rams, 5:15 PM PT. Desk on Los Angeles. Pool card write 44 — Over 37½. We do not grade Monday until the final. Preview first. Publish only when told.",
+    ],
+  },
+  {
+    slug: "week-1-closed-week-2",
+    date: "2026-09-15",
+    day: "Tue Sep 15",
+    kicker: "Week 2",
+    title: "Week 1 closed 12–4. Week 2 is live.",
+    teaser:
+      "Desk 12–4 SU. MNF write 41 exact (KC 31–10). Melbourne and LAC stay in the miss log. Ladder SF / BAL / TB → PHI → BUF → CHI. LAC hedged off the naked ticket.",
+    body: [
+      "Week 1 is graded. PinksDesk finished 12–4 straight up. The Monday night write landed on the nose: we wrote 41, Kansas City 31 and Denver 10 made 41. Exact.",
+      "The misses stay posted. Melbourne we said Rams; San Francisco won 27–7. Titans, Chargers, and Cowboys also missed. Against the spread the tape is uglier than the moneyline — that is why Last week shows both.",
+      "Week 2 opens Thursday at Highmark: Buffalo −3 / 53.5. The ladder is San Francisco, Baltimore, Tampa Bay, then Philadelphia, Buffalo, Chicago. Chargers are hedge-only after the Arizona wreck. Murray is OUT for Minnesota at Chicago.",
+      "Tap Score so far or Last week for every pick vs final. Bribe the Book is live if you want more ships. Football-season updates: Friday noon, Monday noon, Tuesday noon PT — preview first, one Publish when told.",
+    ],
+  },
+  {
     slug: "week-1-open",
     date: "2026-09-10",
     day: "Thu Sep 10",
